@@ -1,0 +1,16 @@
+# Circuits-Combinational-Logic
+第三部分
+
+
+module top_module (
+    input in1,
+    input in2,
+    input in3,
+    output out);
+
+    assign out = ~(in1 ^ in2) ^ in3; //同或门：~^   ^~
+                                     //异或门：^
+endmodule
+
+总结：
+这一小节比较简单，基本逻辑门。一次过。
