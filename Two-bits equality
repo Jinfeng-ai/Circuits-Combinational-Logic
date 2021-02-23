@@ -1,0 +1,16 @@
+# Circuits-Combinational-Logic
+第三部分
+
+
+
+
+module top_module ( input [1:0] A, input [1:0] B, output z ); 
+    
+    //assign z = (A[1:0] == B[1:0]) ? 1 : 0;
+    
+    assign z = (A[1:0] == B[1:0]);
+endmodule
+
+
+总结：
+两种方式，但是不知道用条件判断，这个就是很坑。
