@@ -1,0 +1,24 @@
+# Circuits-Combinational-Logic
+第三部分
+
+
+module top_module (
+    input too_cold,
+    input too_hot,
+    input mode,
+    input fan_on,
+    output heater,
+    output aircon,
+    output fan
+); 
+    
+    //too_cold  too_hot  fan_on  heater  aircon  fan
+    //   1         0        1       1       0      1
+    //   0         1        1       0       1      1
+    //   0         0        1       0       0      1
+
+    always @ (*)begin
+        if(fan_on)
+            
+    end
+endmodule
