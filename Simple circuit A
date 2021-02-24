@@ -1,0 +1,11 @@
+# Circuits-Combinational-Logic
+第三部分
+
+module top_module (input x, input y, output z);
+    
+    assign z = (x ^ y) & x;
+
+endmodule
+
+总结：
+一次通过，但是这个是什么意思呢？哈哈
