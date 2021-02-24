@@ -1,3 +1,31 @@
 # Circuits-Combinational-Logic
 第三部分
 
+题目分析：实际上就是一个逻辑抽象的问题，通过描述可以知道振动模式开启时motor=1，其他情况motor=0，
+而电话响的时候要么ringer=1要么motor=1，且不能同时为1所以可以知道motor与ring和vibrate_mode时与的关系，
+可以到下面一张真值表，填写完motor后可以填补ringer，完成后即可用assing进行赋值。
+
+ring   vibraye_mode   ringer   motor
+ 0          0            0       0
+ 0          1            0       0
+ 1          0            1       0
+ 1          1            0       1
+
+
+参考答案：
+module top_module(
+	input ring, 
+	input vibrate_mode,
+	output ringer,
+	output motor
+);
+	
+	// When should ringer be on? When (phone is ringing) and (phone is not in vibrate mode)
+	assign ringer = ring & ~vibrate_mode;
+	
+	// When should motor be on? When (phone is ringing) and (phone is in vibrate mode)
+	assign motor = ring & vibrate_mode;
+	
+endmodule
+
+总结：我不会，但是看到一个使用真值表去描述题目的含义的，这个还是很实际，但是我没明白真值表的意思。
