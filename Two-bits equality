@@ -2,8 +2,20 @@
 第三部分
 
 
+我写的代码：第一次只是运用了A = B，就报错了。
+module top_module ( input [1:0] A, input [1:0] B, output z ); 
+    
+    always @ (*)begin
+        if(A == B)
+        	z = 1;
+    	else
+        	z = 0;
+    end
+
+endmodule
 
 
+参考代码：
 module top_module ( input [1:0] A, input [1:0] B, output z ); 
     
     //assign z = (A[1:0] == B[1:0]) ? 1 : 0;
