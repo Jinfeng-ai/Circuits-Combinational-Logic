@@ -1,0 +1,72 @@
+# Circuits-Combinational-Logic
+第三部分
+
+
+3位输入向量建立一个人口计数电路；
+
+参考答案啊：
+module top_module( 
+    input [2:0] in,
+    output [1:0] out );
+
+    assign out[1] = in[0]&in[1] | in[1]&in[2] | in[0]&in[2];
+    assign out[0] = in[0] ^ in[1] ^ in[2];
+endmodule
+
+方法二：
+
+module top_module( 
+    input [2:0] in,
+    output [1:0] out );
+    integer i;
+    always@(*)begin
+        out = 2'b00;
+        for(i=0;i<3;i=i+1)begin
+            if(in[i]==1'b1)
+                out = out + 1'b1;
+            else
+                out = out;
+        end
+    end
+endmodule
+
+方法3：
+还有一种方法在过程中使用行为代码（组合始终阻止）以直接实现真值表：
+module top_module( 
+    input [2:0] in,
+    output [1:0] out );
+
+    always @ (*)begin
+        case(in)
+            3'd0: out = 2'd0;
+            3'd1: out = 2'd1;
+            3'd2: out = 2'd1;
+            3'd3: out = 2'd2;
+            3'd4: out = 2'd1;
+            3'd5: out = 2'd2;
+            3'd6: out = 2'd2;
+            3'd7: out = 2'd3;
+        endcase
+    end
+endmodule
+
+
+方法4：
+// This is a function of 3 inputs. One method is to use a 8-entry truth table:
+	// in[2:0] out[1:0]
+	// 000      00
+	// 001      01
+	// 010      01
+	// 011      10
+	// 100      01
+	// 101      10
+	// 110      10
+	// 111      11
+	assign out[0] = (~in[2] & ~in[1] & in[0]) | (~in[2] & in[1] & ~in[0]) | (in[2] & ~in[1] & ~in[0]) | (in[2] & in[1] & in[0]);
+	assign out[1] = (in[1] & in[0]) | (in[2] & in[0]) | (in[2] & in[1]);
+  
+  
+  
+ 方法5：
+ 	Using the addition operator works too:
+	assign out = in[0]+in[1]+in[2];
