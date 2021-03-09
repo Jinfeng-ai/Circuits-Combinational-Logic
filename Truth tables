@@ -36,3 +36,14 @@ A   B   Y
 0   1   0
 1   0   0
 1   1   1
+
+assign f = (x1 & x3) | (x2 & (~x3));
+
+// It can be simplified, by boolean algebra or Karnaugh maps.
+// assign f = (~x3 & x2) | (x3 & x1);
+	
+// You may then notice that this is actually a 2-to-1 mux, selected by x3:
+// assign f = x3 ? x1 : x2;
+
+总结：
+本来准备自己写出来这个，但是一直没有写出来，了解到可以使用卡诺图，但是忘记怎么画的了。
