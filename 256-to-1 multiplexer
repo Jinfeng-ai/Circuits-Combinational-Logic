@@ -1,0 +1,23 @@
+# Circuits-Combinational-Logic
+第三部分
+
+
+module top_module (
+	input [255:0] in,
+	input [7:0] sel,
+	output  out
+);
+
+	// Select one bit from vector in[]. The bit being selected can be variable.
+	assign out = in[sel];
+  //assign out = in >> sel;
+	
+endmodule
+
+本题实质上和 9-to-1 选择器相同，但写一个有 256 case 的 case 语句有些疲劳（手写没有必要，但可以用脚本生成一个）。
+这里我们可以根据题目的要求，结合选择运算符的特性实现。根据提示：选择运算符的 index 可以为变量，
+只要变量的位宽和向量的长度匹配即可。
+
+所以我们直接将 sel ，这个变量，作为片选向量 in 的 index。
+
+根据题意，也可以将输入向量 in 右移 sel 位，高位被截去，输出最低位上的 in[sel]。同样，移位的长度也可以使用变量。
