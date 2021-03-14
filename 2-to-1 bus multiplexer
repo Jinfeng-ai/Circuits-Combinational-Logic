@@ -1,2 +1,15 @@
 # Circuits-Combinational-Logic
 第三部分
+
+
+module top_module( 
+    input [99:0] a, b,
+    input sel,
+    output [99:0] out );
+
+    assign out = sel?b:a;
+endmodule
+
+
+总结：
+通过4位2对1多路选择器，明白了“sel?b:a”，它是sel=1时执行b，否则执行a。然后直接写出来了。
