@@ -12,7 +12,9 @@ module top_module(
             out = a;
     else
         out = b;
-
+        
+        
+    //assign out = sel?b:a;
 endmodule
 
 总结：
