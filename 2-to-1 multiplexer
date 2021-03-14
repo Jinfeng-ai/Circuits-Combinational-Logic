@@ -29,3 +29,4 @@ module lab2(input [3:0] d0,d1,
 
 
 endmodule
+
