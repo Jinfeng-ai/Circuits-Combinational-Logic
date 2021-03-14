@@ -1,2 +1,19 @@
 # Circuits-Combinational-Logic
 第三部分
+
+
+
+module top_module( 
+    input a, b, sel,
+    output out ); 
+    
+    always @ (*)
+        if(sel == 0)
+            out = a;
+    else
+        out = b;
+
+endmodule
+
+总结：
+这个2对1多路选择器是参考写出来的，但是这种思路比较简单的，可以模仿。
