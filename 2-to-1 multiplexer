@@ -17,3 +17,15 @@ endmodule
 
 总结：
 这个2对1多路选择器是参考写出来的，但是这种思路比较简单的，可以模仿。
+
+
+【Verilog4位2选1多路选择器】
+
+module lab2(input [3:0] d0,d1,
+                input s,
+                output [3:0] y
+    );
+     assign y = s?d0 : d1;
+
+
+endmodule
