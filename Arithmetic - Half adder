@@ -1,0 +1,14 @@
+# Circuits-Combinational-Logic
+第三部分
+
+实现半加器
+module top_module( 
+    input a, b,
+    output cout, sum );
+
+    assign sum = a ^ b;
+    assign cout = a & b;
+endmodule
+
+总结：
+通过列真值表，可以直接写出结果；代码是自己编写的，真值表是看的提醒。
