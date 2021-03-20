@@ -1,3 +1,120 @@
 # Circuits-Combinational-Logic
 第三部分
 
+第一次写的：
+//顶层模块：
+module top_module( 
+    input [2:0] a, b,
+    input cin,
+    output [2:0] cout,
+    output [2:0] sum );
+
+    //wire cin;
+    wire f0_sum,f1_sum,f2_sum;
+    wire f0_cout,f1_cout,f2_cout;
+    
+    full_module full0(.a(a), .b(b), .cin(cin), .sum(f0_sum), .cout(f0_cout));
+    full_module full1(.a(a), .b(b), .cin(f0_cout), .sum(f1_sum), .cout(f1_cout));
+    full_module full2(.a(a), .b(b), .cin(f1_cout), .sum(f2_sum), .cout(f2_cout));
+    
+    assign sum = f0_sum | f1_sum | f2_sum;
+    assign cout = f0_cout | f1_cout | f2_cout;
+endmodule
+
+//全加器模块：
+module full_module(
+    input a,
+    input b,
+    input cin,
+    output sum,
+    output cout
+);
+    
+    assign {cout, sum} = a + b + cin;
+endmodule
+
+改过的：
+
+//顶层模块：
+module top_module( 
+    input [2:0] a, b,
+    input cin,
+    output [2:0] cout,
+    output [2:0] sum );
+
+   
+    
+    wire f0_cout;
+    wire f1_cout;
+    wire f2_cout;
+    
+    full_module full0(.a(a[0]), .b(b[0]), .cin(cin), .sum(sum[0]), .cout(f0_cout));
+    full_module full1(.a(a[1]), .b(b[1]), .cin(f0_cout), .sum(sum[1]), .cout(f1_cout));
+    full_module full2(.a(a[2]), .b(b[2]), .cin(f1_cout), .sum(sum[2]), .cout(f2_cout));
+    
+    
+    assign cout = {f0_cout,f1_cout,f2_cout}; //顺序反了。
+endmodule
+
+//全加器模块：
+module full_module(
+    input a,
+    input b,
+    input cin,
+    output sum,
+    output cout
+);
+    
+    assign {cout, sum} = a + b + cin;
+endmodule
+
+参考代码：
+module top_module( 
+    input [2:0] a, b,
+    input cin,
+    output [2:0] cout,
+    output [2:0] sum );
+    
+    wire	wire_cout0;
+    wire	wire_cout1;
+    wire	wire_cout2;
+    
+    full_adder full0(
+        .a		(a[0])		 ,
+        .b		(b[0])		 ,
+        .cin	(cin)		 ,
+        .cout	(wire_cout0) ,
+        .sum	(sum[0])
+    );
+    
+    full_adder full1(
+        .a		(a[1])		 ,
+        .b		(b[1])		 ,
+        .cin	(wire_cout0) ,
+        .cout	(wire_cout1) ,
+        .sum	(sum[1])
+    );
+    
+     full_adder full2(
+        .a		(a[2])		 ,
+        .b		(b[2])		 ,
+        .cin	(wire_cout1) ,
+        .cout	(wire_cout2) ,
+        .sum	(sum[2])
+    );
+    
+    assign cout = {wire_cout2,wire_cout1,wire_cout0} ;
+
+endmodule
+
+module full_adder(
+	input	a	 ,
+    input	b	 ,
+    input	cin  ,
+    
+    output	sum  ,
+    output  cout
+);
+    assign {cout,sum} = a + b + cin;
+    
+endmodule
