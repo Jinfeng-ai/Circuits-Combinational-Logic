@@ -1,0 +1,57 @@
+# Circuits-Combinational-Logic
+第三部分
+
+实现一个全加器。
+我的代码：
+module top_module( 
+    input a, b, cin,
+    output cout, sum );
+
+    assign sum = (~a & b & ~cin) | (a & ~b & ~cin) | (~a & ~b & cin) | (a & b & cin);
+    assign cout = (a & b) | (b & cin) | (a & cin);
+endmodule
+
+参考代码：
+一：
+module top_module( 
+    input a, b, cin,
+    output cout, sum );
+
+    assign {cout,sum} = a + b + cin;
+endmodule
+
+二：
+module top_module( 
+    input a, b, cin,
+    output cout, sum );
+
+    assign sum = a ^ b ^ cin;
+    assign cout = a&b | a&cin | b&cin;
+endmodule
+
+三：
+//顶层模块：
+module top_module( 
+    input a, b, cin,
+    output cout, sum );
+
+    wire h0_sum;
+    wire h0_cout;
+    wire h1_cout;
+    //实例化两个半加器
+    half_module half0(.a(a), .b(b), .sum(h0_sum), .cout(h0_cout));
+    half_module half1(.a(h0_sum), .b(cin), .sum(sum), .cout(h1_cout));
+    assign cout = h1_cout | h0_cout;
+endmodule
+
+//半加器模块，子模块
+module half_module(
+    input a,
+    input b,
+    output sum,
+    output cout
+);
+    
+    assign {cout,sum} = a + b;
+    
+endmodule
