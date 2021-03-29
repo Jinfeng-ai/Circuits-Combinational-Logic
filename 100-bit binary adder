@@ -1,0 +1,20 @@
+# Circuits-Combinational-Logic
+第三部分
+
+题目：创建一个100位二进制加法器。加法器将两个100位数字和一个进位相加，以产生100位总和并执行。
+
+分析：由为拼接符，直接进行赋值。
+
+module top_module(
+    input [99:0] a, b,
+    input cin,
+    output cout,
+    output [99:0] sum
+);
+
+    //The concatenation {cout, sum} is a 101-bit vector.
+    assign {cout, sum} = a + b + cin;
+    
+endmodule
+
+总结：这个开始也不懂，现在好像明白了，大括号应该是拼接符，而且拼接符中是有顺序的。
